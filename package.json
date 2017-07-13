@@ -1,13 +1,14 @@
 {
   "name": "react-docgen-annotation-resolver",
   "version": "1.0.0",
-  "main": "dist/cjs/index.js",
-  "module": "dist/es/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "repository": "git@github.com:Jmeyering/react-docgen-annotation-resolver.git",
   "author": "Jared Meyering <jared.meyering@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "node ./node_modules/horseman-core/tools/build.js annotation-resolver"
+    "watch": "rimraf dist/ && babel src/ --out-dir dist/ --watch",
+    "build": "rimraf dist/ && babel src/ --out-dir dist/"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -23,6 +24,7 @@
     "eslint-plugin-react": "^7.1.0",
     "horseman-core": "^1.3.2",
     "react-docgen": "^2.16.0",
+    "rimraf": "^2.6.1",
     "webpack": "^3.2.0"
   },
   "dependencies": {}
