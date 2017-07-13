@@ -15,7 +15,7 @@ This does not actually work for styled-components yet.
 
 Add the resolver to the styleguidist configuration
 
-```
+```js
 // styleguide.config.js
 const resolver = require('react-docgen-annotation-resolver').default;
 
@@ -28,7 +28,7 @@ module.exports = {
 Only exports marked with the `@component` or `@components` annotation will be
 exported.
 
-```
+```js
 // MyComponent.js
 import styled from 'styled-components';
 
