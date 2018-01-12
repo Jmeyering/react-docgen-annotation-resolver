@@ -1,6 +1,7 @@
 UNRELEASED
 ==================
 - Upgrade to prettier for all code style.
+- Enable TravisCI
 
 1.0.0 / 2017-07-13
 ==================
