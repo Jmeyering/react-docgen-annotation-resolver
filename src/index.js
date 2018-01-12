@@ -1,10 +1,10 @@
-import { utils as docgenUtils } from 'react-docgen'; // eslint-disable-line
+import { utils as docgenUtils } from "react-docgen";
 
-export default function (ast, recast) {
+export default function(ast, recast) {
   const components = [];
   const types = recast.types.namedTypes;
 
-  const exportTagged = (path) => {
+  const exportTagged = path => {
     /**
      * If an export doesn't have leading comments, we can simply continue
      */
@@ -14,17 +14,19 @@ export default function (ast, recast) {
     }
 
     // Search for the @component tag in any export.
-    const isTagged = leadingComments.reduce((acc, comment) => acc === true
-      || comment.value.indexOf('@component') !== -1, []);
+    const isTagged = leadingComments.reduce(
+      (acc, comment) =>
+        acc === true || comment.value.indexOf("@component") !== -1,
+      [],
+    );
 
     if (!isTagged) {
       return false;
     }
 
-
     const definitions = docgenUtils.resolveExportDeclaration(path, types);
 
-    definitions.forEach((definition) => {
+    definitions.forEach(definition => {
       if (definition && components.indexOf(definition) === -1) {
         components.push(definition);
       }
