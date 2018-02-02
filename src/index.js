@@ -1,4 +1,5 @@
 import { utils as docgenUtils } from "react-docgen";
+import resolveHOC from "react-docgen/dist/utils/resolveHOC";
 
 export default function(ast, recast) {
   const components = [];
@@ -28,7 +29,7 @@ export default function(ast, recast) {
 
     definitions.forEach(definition => {
       if (definition && components.indexOf(definition) === -1) {
-        components.push(definition);
+        components.push(docgenUtils.resolveToValue(resolveHOC(definition)));
       }
     });
 
