@@ -1,5 +1,6 @@
-UNRELEASED
+1.1.0 / 2018-08-09
 ==================
+- Resolve components wrapped in HOCs to their definitions
 - Upgrade to prettier for all code style.
 - Enable TravisCI
 
