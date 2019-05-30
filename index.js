@@ -1,9 +1,9 @@
-import { utils as docgenUtils } from "react-docgen";
-import resolveHOC from "react-docgen/dist/utils/resolveHOC";
+const { utils: docgenUtils } = require("react-docgen");
+const { visit } = require("ast-types/main");
+const { default: resolveHOC } = require("react-docgen/dist/utils/resolveHOC");
 
-export default function(ast, recast) {
+module.exports = function(ast) {
   const components = [];
-  const types = recast.types.namedTypes;
 
   const exportTagged = path => {
     /**
@@ -25,7 +25,7 @@ export default function(ast, recast) {
       return false;
     }
 
-    const definitions = docgenUtils.resolveExportDeclaration(path, types);
+    const definitions = docgenUtils.resolveExportDeclaration(path);
 
     definitions.forEach(definition => {
       if (definition && components.indexOf(definition) === -1) {
@@ -36,7 +36,7 @@ export default function(ast, recast) {
     return false;
   };
 
-  recast.visit(ast, {
+  visit(ast, {
     visitFunctionDeclaration: false,
     visitFunctionExpression: false,
     visitClassDeclaration: false,
@@ -56,4 +56,4 @@ export default function(ast, recast) {
   });
 
   return components;
-}
+};
