@@ -1,12 +1,16 @@
-import recast from "recast";
-import parse from "../../tests/parse";
-import annotationResolver from "../";
-
-const n = recast.types.namedTypes;
+const { NodePath, namedTypes } = require("ast-types");
+const { parse } = require("@babel/parser");
+const annotationResolver = require("./");
 
 describe("annotationResolver", () => {
   function parseSource(source) {
-    return annotationResolver(parse(source, recast), recast);
+    return annotationResolver(
+      parse(source, {
+        ranges: true,
+        sourceType: "module",
+        plugins: ["jsx"],
+      }),
+    );
   }
 
   describe("annotated export", () => {
@@ -25,7 +29,7 @@ describe("annotationResolver", () => {
       const result = parseSource(source);
       expect(Array.isArray(result)).toBe(true);
       expect(result.length).toBe(1);
-      expect(result[0] instanceof recast.types.NodePath).toBe(true);
+      expect(result[0] instanceof NodePath).toBe(true);
       expect(result[0].node.callee.object.name).toBe("React");
     });
     test("finds annoted export Stateless", () => {
@@ -43,8 +47,10 @@ describe("annotationResolver", () => {
       const result = parseSource(source);
       expect(Array.isArray(result)).toBe(true);
       expect(result.length).toBe(1);
-      expect(result[0] instanceof recast.types.NodePath).toBe(true);
-      expect(n.ArrowFunctionExpression.check(result[0].node)).toBe(true);
+      expect(result[0] instanceof NodePath).toBe(true);
+      expect(namedTypes.ArrowFunctionExpression.check(result[0].node)).toBe(
+        true,
+      );
     });
     test("finds annotated export Stateful wrapped in HOC", () => {
       const source = `
@@ -61,7 +67,7 @@ describe("annotationResolver", () => {
       const result = parseSource(source);
       expect(Array.isArray(result)).toBe(true);
       expect(result.length).toBe(1);
-      expect(result[0] instanceof recast.types.NodePath).toBe(true);
+      expect(result[0] instanceof NodePath).toBe(true);
       expect(result[0].node.callee.object.name).toBe("React");
     });
     test("finds annotated export Stateless wrapped in HOC", () => {
@@ -79,8 +85,10 @@ describe("annotationResolver", () => {
       const result = parseSource(source);
       expect(Array.isArray(result)).toBe(true);
       expect(result.length).toBe(1);
-      expect(result[0] instanceof recast.types.NodePath).toBe(true);
-      expect(n.ArrowFunctionExpression.check(result[0].node)).toBe(true);
+      expect(result[0] instanceof NodePath).toBe(true);
+      expect(namedTypes.ArrowFunctionExpression.check(result[0].node)).toBe(
+        true,
+      );
     });
     test("Does not find if not annotated Stateless", () => {
       const source = `

@@ -1,12 +1,21 @@
 {
-  extends: [
-    "prettier",
-    "prettier/react",
-    "prettier/standard"
-  ],
-  parser: "babel-eslint",
-  plugins: ["react"],
-  settings: {
-    "import/resolver": "webpack",
+  "parserOptions": {
+    "ecmaVersion": 2017
   },
+  "env": {
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:jest/recommended",
+    "prettier"
+  ],
+  "plugins": [
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": [
+      "error"
+    ]
+  }
 }
