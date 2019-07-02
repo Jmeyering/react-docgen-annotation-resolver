@@ -1,6 +1,6 @@
 {
   "name": "react-docgen-annotation-resolver",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "main": "index.js",
   "repository": "git@github.com:Jmeyering/react-docgen-annotation-resolver.git",
   "author": "Jared Meyering <jared.meyering@gmail.com>",
