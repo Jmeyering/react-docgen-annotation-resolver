@@ -1,3 +1,7 @@
+2.0.0 / 2019-07-02
+==================
+- Support for react-docgen 5.0.0
+
 1.1.0 / 2018-08-09
 ==================
 - Resolve components wrapped in HOCs to their definitions
